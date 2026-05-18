@@ -1,4 +1,5 @@
 
 import("dplyr")
 export("analysis")
+export("analysis_multiyear")
 export("simulate")

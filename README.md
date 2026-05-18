@@ -6,15 +6,20 @@ This R package provides methods and data to enable reproduction of the results p
 
 ## Installing the package
 
-The package can be installed directly from this github repository from within an active R session by using the **remotes** package. If you do not yet have **remotes** installed than
-install it using
+The package can be installed directly from this github repository from within an active R session by using the **remotes** package. If you do not yet have **remotes** it can be
+installed from **CRAN** using
 
+
+```R
 install.packages("remotes")
+```
 
 You can now install **ButterflyLS** using
 
+```R
 library(remotes)
-remotes::install_github("grosed/ButterflyLS/R-packages")
+remotes::install_github("grosed/ButterflyLS/R-package")
+```
 
 ## Documentation
 

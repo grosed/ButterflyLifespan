@@ -1,7 +1,35 @@
 
-
-
-
+#' TODO - Brief description 
+#'
+#' @name analysis_multiyear
+#'
+#' @description TODO - Longer description here (maybe one or two sentences)
+#'
+#' @param data  dataframe containing the data to analysis
+#' @param setup_level  character value "daily" or "weekly" dependent on how the data was sampled.
+#' @param setup_level  character value "doubleslope","slope", "variable" or "fixed"
+#'
+#' @return TODO  describe the ouput structure here 
+#'
+#' @examples
+#'
+#' \donttest{
+#' library(ButterflyLS)
+#'
+#' # lazy load data
+#' data(orange_tip_weekly)
+#' # year to analyse
+#' year <- "2018"
+#' # weekly sampling
+#' setup_level <- "weekly"
+#' # phi type
+#' phi_type = "slope"
+#'
+#' # run analysis
+#' results <- analysis_multiyear(orange_tip_weekly,setup_level,phi_type)
+#' }
+#'
+#' @export
 analysis_multiyear <- function(data,setup_level,phi_type)
 {
 

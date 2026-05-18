@@ -7,7 +7,7 @@ Maintainer: Rachel McCrea <r.mccrea@lancaster.ac.uk>
 Authors@R: c(person("Rachel", "McCrea", role = c("aut", "cre"),email = "r.mccrea@lancaster.ac.uk"))
 Description: Provides methods and data to enable reproduction of the results presented in "Estimation of adult butterfly longevity using long-term citizen-science count data" (Clarke, Dennis and McCrea 2026)
 License: GPL (>= 2)
-Depends: R(>= 3.5),dplyr 
+Depends: R(>= 3.5),dplyr,reshape2 
 LazyData: true
 Config/roxygen2/version: 8.0.0
 

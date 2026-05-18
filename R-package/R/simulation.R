@@ -1,4 +1,66 @@
-
+#' TODO - Brief description 
+#'
+#' @name simulation
+#'
+#' @description TODO - Longer description here (maybe one or two sentences)
+#'
+#' @param setup_level  character value "daily" or "weekly" dependent on how the data is to be sampled. 
+#' @param env_cov.type how to add environmental covariate data, either "lin", "quad" or "none"
+#' @param a.type "N", "SO" or "S"
+#' @param dist.type "P", "NB" or "ZIP" 
+#' @param B number of broods
+# determines how we simulate the covariate data 
+# either "uniform" or "seasonal"
+#' @param cov_sim_type how covariate data is simulated - "uniform" or "seasonal"   
+#' @param n.iter number of iterations
+#' @param dpw number of days per week to simulate
+#' @param meth optimisation method - "Nelder-Mead","SANN" or "L-BFGS-B"
+#' @param convert_weekly convert from the daily to the weekly format -  "yes" or "no"
+#' @param vary_phi vary phi over the season -  "yes" or "no"
+#' @param NA_type missing values - "match_NA", "prop_NA" or "none"
+#' @param nS number of sites, if matching raw data then use the length of the output 
+#'
+#' @return TODO  describe the ouput structure here 
+#'
+#' @examples
+#'
+#' \donttest{
+#' library(ButterflyLS)
+#'
+#' # setup simulation parameters
+#' year <- "2018"
+#' setup_level <- "daily"
+#' env_cov.type <- "none"
+#' a.type <- "SO" 
+#' dist.type <- "P" 
+#' B <- 1   ## single brood
+#' cov_sim_type <- "uniform"
+#' n.iter <-250
+#' dpw <- 1
+#' meth <- "Nelder-Mead"
+#' convert_weekly <- "no"
+#' vary_phi <- "no"
+#' NA_type <- "prop_NA"
+#' nS <- 200
+#'
+#' # run simulation
+#' results <- simulation(setup_level,
+#' 		         env_cov.type,
+#' 		         a.type,
+#' 		         dist.type, 
+#' 		         B,
+#' 		         cov_sim_type,
+#' 		         n.iter,
+#' 		         dpw,
+#' 		         meth,
+#' 		         convert_weekly,
+#' 		         vary_phi,
+#' 		         NA_type,
+#' 		         nS,
+#' 		        year)
+#' }
+#'
+#' @export
 simulation <- function(setup_level,
 		       env_cov.type,
 		       a.type,
@@ -13,6 +75,7 @@ simulation <- function(setup_level,
 		       NA_type,
 		       nS,
 		       year)
+		       
 {
 
 

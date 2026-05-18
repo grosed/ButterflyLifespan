@@ -1,5 +1,6 @@
 
 import("dplyr")
+importFrom("stats", "dnbinom", "dnorm", "dpois", "optim", "pnorm","rnbinom", "rnorm", "rpois", "runif", "uniroot")
 export("analysis")
 export("analysis_multiyear")
-export("simulate")
+export("simulation")

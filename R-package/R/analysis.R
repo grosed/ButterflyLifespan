@@ -1,4 +1,34 @@
 
+
+#' TODO - Brief description 
+#'
+#' @name analysis
+#'
+#' @description TODO - Longer description here (maybe one or two sentences)
+#'
+#' @param data  dataframe containing the data to analysis
+#' @param year  character value corresponding to the the year to analyse from the data
+#' @param setup_level  character value "daily" or "weekly" dependent on how the data was sampled. 
+#'
+#' @return TODO  describe the ouput structure here 
+#'
+#' @examples
+#'
+#' \donttest{
+#' library(ButterflyLS)
+#'
+#' # lazy load data
+#' data(dark_green_fritillary_weekly)
+#' # year to analyse
+#' year <- "2018"
+#' # weekly sampling
+#' setup_level <- "weekly"
+#'
+#' # run analysis
+#' results <- analysis(dark_green_fritillary_weekly,year,setup_level)
+#' }
+#'
+#' @export
 analysis <- function(data,year,setup_level)
 {
 

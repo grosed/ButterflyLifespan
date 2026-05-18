@@ -1,24 +1,18 @@
 
-
-library(dplyr)
-library(splines)
-library(reshape2)
-
-
-simulate <- function(setup_level,
-		     env_cov.type,
-		     a.type,
-		     dist.type, 
-		     B,
-		     cov_sim_type,
-		     n.iter,
-		     dpw,
-		     meth,
-		     convert_weekly,
-		     vary_phi,
-		     NA_type,
-		     nS,
-		     year)
+simulation <- function(setup_level,
+		       env_cov.type,
+		       a.type,
+		       dist.type, 
+		       B,
+		       cov_sim_type,
+		       n.iter,
+		       dpw,
+		       meth,
+		       convert_weekly,
+		       vary_phi,
+		       NA_type,
+		       nS,
+		       year)
 {
 
 

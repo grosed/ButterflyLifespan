@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis_multiyear.R
 \name{analysis_multiyear}
 \alias{analysis_multiyear}
-\title{TODO - Brief description}
+\title{Analysis code for fitting a multiyear GAI stopover model to data spanning multiple years.}
 \usage{
 analysis_multiyear(data, setup_level, phi_type)
 }
@@ -15,7 +15,7 @@ analysis_multiyear(data, setup_level, phi_type)
 TODO  describe the ouput structure here
 }
 \description{
-TODO - Longer description here (maybe one or two sentences)
+Code used for fitting a multiyear GAI stopover model to data spanning multiple years. The phi parameter is used to derive lifespan estimates and can be modelled to be "fixed" across all years, to be fully "variable" year-to-year or modelled to change gradually with a "slope" term.
 }
 \examples{
 

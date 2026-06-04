@@ -1,8 +1,8 @@
-#' TODO - Brief description 
+#' Simulation code to assess model performance. 
 #'
 #' @name simulation
 #'
-#' @description TODO - Longer description here (maybe one or two sentences)
+#' @description Simulation code to be used to assess biases in model output. Associated with number of days sampled per week or number of sites sampled. 
 #'
 #' @param setup_level  character value "daily" or "weekly" dependent on how the data is to be sampled. 
 #' @param env_cov.type how to add environmental covariate data, either "lin", "quad" or "none"
@@ -20,7 +20,7 @@
 #' @param NA_type missing values - "match_NA", "prop_NA" or "none"
 #' @param nS number of sites, if matching raw data then use the length of the output 
 #'
-#' @return TODO  describe the ouput structure here 
+#' @return List of the output for each iteration of the simulation. 
 #'
 #' @examples
 #'

@@ -10,7 +10,7 @@
 #' @param year  character value corresponding to the the year to analyse from the data
 #' @param setup_level  character value "daily" or "weekly" dependent on how the data was sampled. 
 #'
-#' @return TODO  describe the ouput structure here 
+#' @return A list object containing three lists. The first containing the output used for deriving lifespan estimates and the second containing each output from each random start. The third states the likelihood for each random start.
 #'
 #' @examples
 #'

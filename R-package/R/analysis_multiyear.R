@@ -1,9 +1,9 @@
 
-#' TODO - Brief description 
+#' Analysis code for fitting a multiyear GAI stopover model to data spanning multiple years.
 #'
 #' @name analysis_multiyear
 #'
-#' @description TODO - Longer description here (maybe one or two sentences)
+#' @description Code used for fitting a multiyear GAI stopover model to data spanning multiple years. The phi parameter is used to derive lifespan estimates and can be modelled to be "fixed" across all years, to be fully "variable" year-to-year or modelled to change gradually with a "slope" term. Data can be added either in a "dailt" or "weekly" format.
 #'
 #' @param data  dataframe containing the data to analysis
 #' @param setup_level  character value "daily" or "weekly" dependent on how the data was sampled.

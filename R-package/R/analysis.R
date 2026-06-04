@@ -1,10 +1,10 @@
 
 
-#' TODO - Brief description 
+#' Analysis code for fitting a GAI stopover model to a single year of data.
 #'
 #' @name analysis
 #'
-#' @description TODO - Longer description here (maybe one or two sentences)
+#' @description Code used for fitting a single year GAI stopover model. The phi parameter is used to derive lifespan estimates. Data can be added either in a "daily" or "weekly" format.
 #'
 #' @param data  dataframe containing the data to analysis
 #' @param year  character value corresponding to the the year to analyse from the data

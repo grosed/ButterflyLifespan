@@ -7,7 +7,7 @@
 #'
 #' @param data  dataframe containing the data to analysis
 #' @param setup_level  character value "daily" or "weekly" dependent on how the data was sampled.
-#' @param setup_level  character value "doubleslope","slope", "variable" or "fixed"
+#' @param phi_type  character value "doubleslope","slope", "variable" or "fixed"
 #'
 #' @return A list object containing three lists. The first containing the output used for deriving lifespan estimates and the second containing each output from each random start. The third states the likelihood for each random start.
 #'

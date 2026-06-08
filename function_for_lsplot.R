@@ -1,7 +1,6 @@
 library(remotes)
 remotes::install_github("grosed/ButterflyLS/R-package")
 
-library(ggplot2)
 library(ButterflyLS)
 
 data(dark_green_fritillary_weekly)

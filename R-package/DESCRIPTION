@@ -1,8 +1,8 @@
-Package: ButterflyLS
+Package: ButterflyLifespan
 Type: Package
 Title: Butterfly Longevity Estimation 
 Version: 1.0.0
-Date: 2026-05-18
+Date: 2026-06-09
 Maintainer: Rachel McCrea <r.mccrea@lancaster.ac.uk>
 Authors@R: c(person("Rachel", "McCrea", role = c("aut", "cre"),email = "r.mccrea@lancaster.ac.uk"))
 Description: Provides methods and data to enable reproduction of the results presented in "Estimation of adult butterfly longevity using long-term citizen-science count data" (Clarke, Dennis and McCrea 2026)

@@ -1,4 +1,4 @@
-# ButterflyLS
+# ButterflyLifespan
 
 ## Description
 
@@ -14,11 +14,11 @@ installed from **CRAN** using
 install.packages("remotes")
 ```
 
-You can now install **ButterflyLS** using
+You can now install **ButterflyLifespan** using
 
 ```R
 library(remotes)
-remotes::install_github("grosed/ButterflyLS/R-package")
+remotes::install_github("grosed/ButterflyLifespan/R-package")
 ```
 
 ## Documentation

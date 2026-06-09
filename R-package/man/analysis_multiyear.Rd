@@ -9,13 +9,15 @@ analysis_multiyear(data, setup_level, phi_type)
 \arguments{
 \item{data}{dataframe containing the data to analysis}
 
-\item{setup_level}{character value "doubleslope","slope", "variable" or "fixed"}
+\item{setup_level}{character value "daily" or "weekly" dependent on how the data was sampled.}
+
+\item{phi_type}{character value "doubleslope","slope", "variable" or "fixed"}
 }
 \value{
-TODO  describe the ouput structure here
+A list object containing three lists. The first containing the output used for deriving lifespan estimates and the second containing each output from each random start. The third states the likelihood for each random start.
 }
 \description{
-Code used for fitting a multiyear GAI stopover model to data spanning multiple years. The phi parameter is used to derive lifespan estimates and can be modelled to be "fixed" across all years, to be fully "variable" year-to-year or modelled to change gradually with a "slope" term.
+Code used for fitting a multiyear GAI stopover model to data spanning multiple years. The phi parameter is used to derive lifespan estimates and can be modelled to be "fixed" across all years, to be fully "variable" year-to-year or modelled to change gradually with a "slope" term. Data can be added either in a "daily" or "weekly" format.
 }
 \examples{
 

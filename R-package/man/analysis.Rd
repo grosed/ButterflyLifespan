@@ -2,7 +2,7 @@
 % Please edit documentation in R/analysis.R
 \name{analysis}
 \alias{analysis}
-\title{TODO - Brief description}
+\title{Analysis code for fitting a GAI stopover model to a single year of data.}
 \usage{
 analysis(data, year, setup_level)
 }
@@ -14,10 +14,10 @@ analysis(data, year, setup_level)
 \item{setup_level}{character value "daily" or "weekly" dependent on how the data was sampled.}
 }
 \value{
-TODO  describe the ouput structure here
+A list object containing three lists. The first containing the output used for deriving lifespan estimates and the second containing each output from each random start. The third states the likelihood for each random start.
 }
 \description{
-TODO - Longer description here (maybe one or two sentences)
+Code used for fitting a single year GAI stopover model. The phi parameter is used to derive lifespan estimates. Data can be added either in a "daily" or "weekly" format.
 }
 \examples{
 

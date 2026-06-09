@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulation.R
 \name{simulation}
 \alias{simulation}
-\title{TODO - Brief description}
+\title{Simulation code to assess model performance.}
 \usage{
 simulation(
   setup_level,
@@ -49,10 +49,10 @@ simulation(
 \item{nS}{number of sites, if matching raw data then use the length of the output}
 }
 \value{
-TODO  describe the ouput structure here
+List of the output for each iteration of the simulation.
 }
 \description{
-TODO - Longer description here (maybe one or two sentences)
+Simulation code to be used to assess biases in model output. Associated with number of days sampled per week or number of sites sampled.
 }
 \examples{
 

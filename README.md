@@ -34,5 +34,7 @@ The output is then processed to obtain lifespan estimates with associated uncert
 spans 10 years from 2009-2018. Dark Green Fritillary data are used in the weekly format and lifespan is modelled as a linear trend across time using
 the 'phi_type="slope"' option. The data frame produced can be used to create a plot showing how lifespan varies by year.
 
-The example is located in the examples directory of this repository and is available in the form of a jupyter notebook or as a standalone R script.
+The example is located in the examples directory of this repository and is available in the
+form of a [jupyter notebook](https://github.com/grosed/ButterflyLifespan/blob/main/examples/GAI-multiyear-stopover.ipynb) or
+as a [standalone R script](https://github.com/grosed/ButterflyLifespan/blob/main/examples/GAI-multiyear-stopover.R).
 

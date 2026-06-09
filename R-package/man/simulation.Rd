@@ -47,6 +47,8 @@ simulation(
 \item{NA_type}{missing values - "match_NA", "prop_NA" or "none"}
 
 \item{nS}{number of sites, if matching raw data then use the length of the output}
+
+\item{year, }{year to simulate}
 }
 \value{
 List of the output for each iteration of the simulation.

@@ -18,7 +18,8 @@
 #' @param convert_weekly convert from the daily to the weekly format -  "yes" or "no"
 #' @param vary_phi vary phi over the season -  "yes" or "no"
 #' @param NA_type missing values - "match_NA", "prop_NA" or "none"
-#' @param nS number of sites, if matching raw data then use the length of the output 
+#' @param nS number of sites, if matching raw data then use the length of the output
+#' @param year, year to simulate 
 #'
 #' @return List of the output for each iteration of the simulation. 
 #'

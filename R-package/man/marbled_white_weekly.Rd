@@ -15,7 +15,7 @@ Weekly site, year, and count data for marbled white
 }
 \examples{
 
-library(ButterflyLS)
+library(ButterflyLifespan)
 
 data(marbled_white_weekly)
 head(marbled_white_weekly)

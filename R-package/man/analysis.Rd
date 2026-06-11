@@ -22,7 +22,7 @@ Code used for fitting a single year GAI stopover model. The phi parameter is use
 \examples{
 
 \donttest{
-library(ButterflyLS)
+library(ButterflyLifespan)
 
 # lazy load data
 data(dark_green_fritillary_weekly)

@@ -22,7 +22,7 @@ Code used for fitting a multiyear GAI stopover model to data spanning multiple y
 \examples{
 
 \donttest{
-library(ButterflyLS)
+library(ButterflyLifespan)
 
 # lazy load data
 data(orange_tip_weekly)

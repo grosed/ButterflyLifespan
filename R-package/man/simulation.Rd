@@ -59,7 +59,7 @@ Simulation code to be used to assess biases in model output. Associated with num
 \examples{
 
 \donttest{
-library(ButterflyLS)
+library(ButterflyLifespan)
 
 # setup simulation parameters
 year <- "2018"

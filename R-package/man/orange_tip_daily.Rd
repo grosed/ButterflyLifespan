@@ -15,7 +15,7 @@ Daily site, year, and count data for orange tip
 }
 \examples{
 
-library(ButterflyLS)
+library(ButterflyLifespan)
 
 data(orange_tip_daily)
 head(orange_tip_daily)

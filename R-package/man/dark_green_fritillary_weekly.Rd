@@ -15,7 +15,7 @@ Weekly site, year, and count data for dark green fritillary
 }
 \examples{
 
-library(ButterflyLS)
+library(ButterflyLifespan)
 
 data(dark_green_fritillary_weekly)
 head(dark_green_fritillary_weekly)

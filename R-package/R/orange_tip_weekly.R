@@ -16,7 +16,7 @@
 #' 
 #' @examples
 #'
-#' library(ButterflyLS)
+#' library(ButterflyLifespan)
 #'
 #' data(orange_tip_weekly)
 #' head(orange_tip_weekly)

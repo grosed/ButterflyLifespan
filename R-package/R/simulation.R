@@ -26,7 +26,7 @@
 #' @examples
 #'
 #' \donttest{
-#' library(ButterflyLS)
+#' library(ButterflyLifespan)
 #'
 #' # setup simulation parameters
 #' year <- "2018"

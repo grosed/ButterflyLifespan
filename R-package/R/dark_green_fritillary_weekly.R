@@ -16,7 +16,7 @@
 #' 
 #' @examples
 #'
-#' library(ButterflyLS)
+#' library(ButterflyLifespan)
 #'
 #' data(dark_green_fritillary_weekly)
 #' head(dark_green_fritillary_weekly)

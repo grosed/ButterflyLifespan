@@ -15,7 +15,7 @@
 #' @examples
 #'
 #' \donttest{
-#' library(ButterflyLS)
+#' library(ButterflyLifespan)
 #'
 #' # lazy load data
 #' data(dark_green_fritillary_weekly)

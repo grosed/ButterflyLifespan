@@ -14,7 +14,7 @@
 #' @examples
 #'
 #' \donttest{
-#' library(ButterflyLS)
+#' library(ButterflyLifespan)
 #'
 #' # lazy load data
 #' data(orange_tip_weekly)

@@ -16,7 +16,7 @@
 #' 
 #' @examples
 #'
-#' library(ButterflyLS)
+#' library(ButterflyLifespan)
 #'
 #' data(marbled_white_daily)
 #' head(marbled_white_daily)

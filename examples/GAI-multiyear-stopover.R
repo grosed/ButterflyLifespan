@@ -21,10 +21,7 @@ dgf_week <- dgf_week %>% filter(SITENO%in%sample(unique(dgf_week$SITENO),30)) %>
 
 output <- analysis_multiyear(dgf_week,"weekly","slope")
 
-
-
-###############################################
-##  helper function to transform the output to lifespan
+##  helper function to transform the output to data frame
 
 
 post_process <- function(output,setup_level,phi_type){
@@ -121,6 +118,10 @@ post_process <- function(output,setup_level,phi_type){
   return(plot_df)
 }
 
+
+## post process the output
+
+lifespan <- post_process(output,"weekly","slope")
 
 
 

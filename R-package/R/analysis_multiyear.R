@@ -33,6 +33,10 @@
 analysis_multiyear <- function(data,setup_level,phi_type)
 {
 
+withr::local_options(.new = list(warn = -1))
+{
+
+
 ukbms_sp <- data
 
 
@@ -1550,6 +1554,7 @@ if(length(year)==1){
               output <- fit_it_model()
 	      
 	      return(output)
+	      }
 	      }
             
 

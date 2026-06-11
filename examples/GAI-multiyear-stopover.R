@@ -27,7 +27,7 @@ output <- analysis_multiyear(dgf_week,"weekly","slope")
 ##  helper function to transform the output to lifespan
 
 
-blob <- function(output,setup_level,phi_type){
+post_process <- function(output,setup_level,phi_type){
   trans_phi <- output[[1]][["phi.out"]]
   if (setup_level=="weekly"){
     trans_phi_day <- trans_phi^(1/7)

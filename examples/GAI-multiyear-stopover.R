@@ -1,11 +1,11 @@
 ## Install the ButterflyLifespan package
 
 library(remotes)
-remotes::install_github("grosed/ButterflyLS/R-package")
+remotes::install_github("grosed/ButterflyLifespan/R-package")
 
 ## load the library
 
-library(ButterflyLS)
+library(ButterflyLifespan)
 
 ## lazy load the data
 
@@ -14,7 +14,7 @@ dgf_week <- dark_green_fritillary_weekly
 
 ## for demonstration purposes, take a random subset of the data
 
-set.seed(0)
+set.seed(1)
 dgf_week <- dgf_week %>% filter(SITENO%in%sample(unique(dgf_week$SITENO),30)) %>% filter(YEAR > 2008)
 
 ## analyse the data 
@@ -24,7 +24,7 @@ output <- analysis_multiyear(dgf_week,"weekly","slope")
 
 
 ###############################################
-##  helper function to transform the ouput to lifespan
+##  helper function to transform the output to lifespan
 
 
 blob <- function(output,setup_level,phi_type){
@@ -49,7 +49,7 @@ blob <- function(output,setup_level,phi_type){
         
     se_lifespan = vector(mode="numeric",length=length(output[[1]][["mu1.est"]]))
     for (i in 1:length(output[[1]][["mu1.est"]])){
-      se_phi_mat <- as.matrix(c(se_phi_int[i],se_phi_slope[i],se_phi_slope2[i]))
+      se_phi_mat <- as.matrix(c(se_phi_int[i],se_phi_slope[i]))
       
       se_phi_row_mat <- t(se_phi_mat)
       
@@ -92,7 +92,7 @@ blob <- function(output,setup_level,phi_type){
       se_phi_int <- exp(output[[1]][["phi.slope"]]*phi.cov)*exp(output[[1]][["phi.int"]])*exp(output[[1]][["phi.slope2"]]*phi.cov^2)
       se_phi_slope <- phi.cov*exp(output[[1]][["phi.slope"]]*phi.cov)*exp(output[[1]][["phi.int"]])*exp(output[[1]][["phi.slope2"]]*phi.cov^2)
       se_phi_slope2 <- (2*phi.cov)*phi.cov*exp(output[[1]][["phi.slope"]]*phi.cov)*exp(output[[1]][["phi.int"]])*exp(output[[1]][["phi.slope2"]]*phi.cov^2)
-      # se_phi_mat <- cbind(se_phi_int,se_phi_slope)
+
       
       
       se_lifespan = vector(mode="numeric",length=length(output[[1]][["mu1.est"]]))

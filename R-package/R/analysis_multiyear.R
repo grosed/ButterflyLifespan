@@ -1541,6 +1541,100 @@ if(length(year)==1){
       } 
       output$D <- sum(output$dev)/(sum(len_y)-output$npar)
       
+      
+      
+      
+        trans_phi <- phi.out
+        if (setup_level=="weekly"){
+          trans_phi_day <- trans_phi^(1/7)
+          ls_phi <- (1/(1-trans_phi_day))
+        } else {
+          ls_phi <- (1/(1-trans_phi))
+        }
+        
+        Hess =this.fit$hessian
+        inv.Hess = solve(Hess)
+        res = sqrt(diag(inv.Hess))
+        
+        if (phi_type=="slope"){
+          
+          se_phi_int <- exp(phi.slope.out*phi.cov)*exp(phi.int.out)
+          se_phi_slope <- phi.cov*exp(phi.int.out)*exp(phi.slope.out*phi.cov)
+          
+          se_lifespan = vector(mode="numeric",length=length(mu1.out))
+          for (i in 1:length(mu1.out)){
+            se_phi_mat <- as.matrix(c(se_phi_int[i],se_phi_slope[i]))
+            
+            se_phi_row_mat <- t(se_phi_mat)
+            
+            var_cor_phi <- inv.Hess[(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + 2),(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + 2)]
+            
+            
+            se_lifespan[i] <- se_phi_row_mat %*% var_cor_phi %*% se_phi_mat
+          }
+          
+          
+          CI_lifespan = 1.96*(sqrt(se_lifespan))
+          
+          
+          plot_df <- data.frame(lifespan=ls_phi,
+                                ci_low=ls_phi-CI_lifespan,
+                                ci_up=ls_phi+CI_lifespan,
+                                year=year)
+          
+          
+        } else if (phi_type=="variable"){
+          res=res[(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + length(mu1.out))]
+          
+          if (setup_level=="daily"){
+            SE_ls_d <- (exp(this.fit$par))*res
+          } else {
+            SE_ls_d <- (1/(1-(1/(1+exp(-(this.fit$par))))^(1/7))^2)*((1/7)*(1/(1+exp(-(this.fit$par)))^(-(6/7))))*((exp(-(this.fit$par)))/(1+exp(-(this.fit$par)))^2)*(res)
+          }
+          
+          
+          plot_df <- data.frame(lifespan=ls_phi,
+                                ci_low=ls_phi-(SE_ls_d*1.96),
+                                ci_up=ls_phi+(SE_ls_d*1.96),
+                                year=year)
+          
+          
+          
+        } else if (ohi_type=="doubleslope"){
+          phi.cov = scale(1:length(mu1.out))
+          
+          se_phi_int <- exp(phi.slope.out*phi.cov)*exp(phi.int.out)*exp(phi.slope.out2*phi.cov^2)
+          se_phi_slope <- phi.cov*exp(phi.slope.out*phi.cov)*exp(phi.int.out)*exp(phi.slope.out2*phi.cov^2)
+          se_phi_slope2 <- (2*phi.cov)*phi.cov*exp(phi.slope.out*phi.cov)*exp(phi.int.out)*exp(phi.slope.out2*phi.cov^2)
+          
+          
+          
+          se_lifespan = vector(mode="numeric",length=length(mu1.out))
+          for (i in 1:length(mu1.out)){
+            se_phi_mat <- as.matrix(c(se_phi_int[i],se_phi_slope[i],se_phi_slope2[i]))
+            
+            se_phi_row_mat <- t(se_phi_mat)
+            
+            var_cor_phi <- inv.Hess[(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + 3),(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + 3)]
+            
+            
+            se_lifespan[i] <- se_phi_row_mat %*% var_cor_phi %*% se_phi_mat
+          }
+          
+          
+          CI_lifespan = 1.96*(sqrt(se_lifespan))
+          
+          
+          plot_df <- data.frame(lifespan=ls_phi,
+                                ci_low=ls_phi-CI_lifespan,
+                                ci_up=ls_phi+CI_lifespan,
+                                year=year)
+          
+        }
+        
+
+      output$lifespan <- plot_df
+      
       output
     } else {NA}
   }

@@ -5,18 +5,14 @@
 #' @description Simulation code to be used to assess biases in model output. Associated with number of days sampled per week or number of sites sampled. 
 #'
 #' @param setup_level  character value "daily" or "weekly" dependent on how the data is to be sampled. 
-#' @param env_cov.type how to add environmental covariate data, either "lin", "quad" or "none"
-#' @param a.type "N", "SO" or "S"
+#' @param phi_input  numeric value of phi used to simulate data, at the daily level 
 #' @param dist.type "P", "NB" or "ZIP" 
-#' @param B number of broods
 # determines how we simulate the covariate data 
 # either "uniform" or "seasonal"
-#' @param cov_sim_type how covariate data is simulated - "uniform" or "seasonal"   
 #' @param n.iter number of iterations
 #' @param dpw number of days per week to simulate
 #' @param meth optimisation method - "Nelder-Mead","SANN" or "L-BFGS-B"
 #' @param convert_weekly convert from the daily to the weekly format -  "yes" or "no"
-#' @param vary_phi vary phi over the season -  "yes" or "no"
 #' @param NA_type missing values - "match_NA", "prop_NA" or "none"
 #' @param nS number of sites, if matching raw data then use the length of the output
 #' @param year, year to simulate 
@@ -31,31 +27,22 @@
 #' # setup simulation parameters
 #' year <- "2018"
 #' setup_level <- "daily"
-#' env_cov.type <- "none"
-#' a.type <- "SO" 
 #' dist.type <- "P" 
-#' B <- 1   ## single brood
-#' cov_sim_type <- "uniform"
 #' n.iter <-250
 #' dpw <- 1
 #' meth <- "Nelder-Mead"
 #' convert_weekly <- "no"
-#' vary_phi <- "no"
 #' NA_type <- "prop_NA"
 #' nS <- 200
 #'
 #' # run simulation
 #' results <- simulation(setup_level,
-#' 		         env_cov.type,
-#' 		         a.type,
+#'             phi_input,
 #' 		         dist.type, 
-#' 		         B,
-#' 		         cov_sim_type,
 #' 		         n.iter,
 #' 		         dpw,
 #' 		         meth,
 #' 		         convert_weekly,
-#' 		         vary_phi,
 #' 		         NA_type,
 #' 		         nS,
 #' 		        year)
@@ -63,22 +50,23 @@
 #'
 #' @export
 simulation <- function(setup_level,
-		       env_cov.type,
-		       a.type,
+                       phi_input,
 		       dist.type, 
-		       B,
-		       cov_sim_type,
 		       n.iter,
 		       dpw,
 		       meth,
 		       convert_weekly,
-		       vary_phi,
 		       NA_type,
 		       nS,
 		       year)
 		       
 {
 
+a.type <- "SO"
+env_cov.type <- "none"
+B <- 1
+cov_sim_type <- "uniform"
+vary_phi <- "no"
 
 # Number of visits
 if (setup_level== "daily"){
@@ -94,7 +82,7 @@ prop_na <- 0.3
 
 # phi input at the daily level (which will then be converted to the corresponding weekly, if appropriate)
 if (vary_phi=="no"){
-  phi <- 0.9
+  phi <- phi_input
 } else {
   # For phi changing over time quadratically
   tim <- as.vector(1:nT)

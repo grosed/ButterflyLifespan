@@ -43,7 +43,7 @@ analysis <- function(data,year,setup_level)
       
         
         if (setup_level== "daily") {
-          nT <- length(DATE)
+          nT <- max(ukbms_sp$DAYNO)
         } else {
           nT <-  26
         }
@@ -1494,6 +1494,35 @@ if(length(year)==1){
         len_y[i] <- length(output$modelfit$y[[i]][!is.na(output$modelfit$y[[i]])])
       } 
       output$D <- sum(output$dev)/(sum(len_y)-output$npar)
+      
+      
+      
+        trans_phi <- phi.out
+        if (setup_level=="weekly"){
+          trans_phi_day <- trans_phi^(1/7)
+          ls_phi <- (1/(1-trans_phi_day))
+        } else {
+          ls_phi <- (1/(1-trans_phi))
+        }
+        
+        Hess = this.fit$hessian
+        inv.Hess = solve(Hess)
+        res = sqrt(diag(inv.Hess))
+        
+        if (setup_level=="daily"){
+          SE_ls_d <- (exp(this.fit$par[3]))*res[3]
+        } else {
+          SE_ls_d <- (1/(1-(1/(1+exp(-(this.fit$par[3]))))^(1/7))^2)*((1/7)*(1/(1+exp(-(this.fit$par[3])))^(-(6/7))))*((exp(-(this.fit$par[3])))/(1+exp(-(this.fit$par[3])))^2)*(res[3])
+        }
+        
+        plot_df <- data.frame(lifespan=ls_phi,
+                              ci_low=ls_phi-(SE_ls_d*1.96),
+                              ci_up=ls_phi+(SE_ls_d*1.96))
+    
+      
+      
+      output$lifespan <- plot_df
+      
       
       output
     } else {NA}

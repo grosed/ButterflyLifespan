@@ -6,16 +6,12 @@
 \usage{
 simulation(
   setup_level,
-  env_cov.type,
-  a.type,
+  phi_input,
   dist.type,
-  B,
-  cov_sim_type,
   n.iter,
   dpw,
   meth,
   convert_weekly,
-  vary_phi,
   NA_type,
   nS,
   year
@@ -24,15 +20,9 @@ simulation(
 \arguments{
 \item{setup_level}{character value "daily" or "weekly" dependent on how the data is to be sampled.}
 
-\item{env_cov.type}{how to add environmental covariate data, either "lin", "quad" or "none"}
-
-\item{a.type}{"N", "SO" or "S"}
+\item{phi_input}{numeric value of phi used to simulate data, at the daily level}
 
 \item{dist.type}{"P", "NB" or "ZIP"}
-
-\item{B}{number of broods}
-
-\item{cov_sim_type}{how covariate data is simulated - "uniform" or "seasonal"}
 
 \item{n.iter}{number of iterations}
 
@@ -41,8 +31,6 @@ simulation(
 \item{meth}{optimisation method - "Nelder-Mead","SANN" or "L-BFGS-B"}
 
 \item{convert_weekly}{convert from the daily to the weekly format -  "yes" or "no"}
-
-\item{vary_phi}{vary phi over the season -  "yes" or "no"}
 
 \item{NA_type}{missing values - "match_NA", "prop_NA" or "none"}
 
@@ -64,31 +52,22 @@ library(ButterflyLifespan)
 # setup simulation parameters
 year <- "2018"
 setup_level <- "daily"
-env_cov.type <- "none"
-a.type <- "SO" 
 dist.type <- "P" 
-B <- 1   ## single brood
-cov_sim_type <- "uniform"
 n.iter <-250
 dpw <- 1
 meth <- "Nelder-Mead"
 convert_weekly <- "no"
-vary_phi <- "no"
 NA_type <- "prop_NA"
 nS <- 200
 
 # run simulation
 results <- simulation(setup_level,
-		         env_cov.type,
-		         a.type,
+            phi_input,
 		         dist.type, 
-		         B,
-		         cov_sim_type,
 		         n.iter,
 		         dpw,
 		         meth,
 		         convert_weekly,
-		         vary_phi,
 		         NA_type,
 		         nS,
 		        year)

@@ -29,7 +29,9 @@ Additionally, the **documentation** directory in this repository contains a pdf 
 
 ## Examples
 
-An example is provided that demonstrates the process of fitting a GAI multiyear stopover model using the package.
+### Example 1 - GAI multiyear
+
+This example demonstrates the process of fitting a GAI multiyear stopover model using the package.
 The output is then processed to obtain lifespan estimates with associated uncertainties. To minimise fitting time a random subsample of 30 sites is used which
 spans 10 years from 2009-2018. Dark Green Fritillary data are used in the weekly format and lifespan is modelled as a linear trend across time using
 the 'phi_type="slope"' option. The data frame produced can be used to create a plot showing how lifespan varies by year.
@@ -38,3 +40,10 @@ The example is located in the examples directory of this repository and is avail
 form of a [jupyter notebook](https://github.com/grosed/ButterflyLifespan/blob/main/examples/GAI-multiyear-stopover.ipynb) or
 as a [standalone R script](https://github.com/grosed/ButterflyLifespan/blob/main/examples/GAI-multiyear-stopover.R).
 
+### Example 2 - GAI singleyear
+
+TODO - Description to go here !!
+
+The example is located in the examples directory of this repository and is available in the
+form of a [jupyter notebook](https://github.com/grosed/ButterflyLifespan/blob/main/examples/GAI-singleyear-stopover.ipynb) or
+as a [standalone R script](https://github.com/grosed/ButterflyLifespan/blob/main/examples/GAI-singleyear-stopover.R).

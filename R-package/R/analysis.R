@@ -450,6 +450,36 @@ if(length(year)==1){
                              2*(sum((output$modelfit$y*log(output$modelfit$y/output$Fitted)-((output$r.out+output$modelfit$y)*log((output$r.out+output$modelfit$y)/(output$r.out+output$Fitted))))[output$modelfit$y>0 & !is.na(output$modelfit$y)])-sum((output$r.out*log(output$r.out/(output$r.out+output$Fitted)))[!is.na(output$modelfit$y) & output$modelfit$y==0]))},
                            ZIP={NA})
       output$D <- output$dev/(length(output$modelfit$y[!is.na(output$modelfit$y)])-output$npar)
+      
+      
+      trans_phi <- phi.out
+      if (setup_level=="weekly"){
+        trans_phi_day <- trans_phi^(1/7)
+        ls_phi <- (1/(1-trans_phi_day))
+      } else {
+        ls_phi <- (1/(1-trans_phi))
+      }
+      
+      Hess = this.fit$hessian
+      inv.Hess = solve(Hess)
+      res = sqrt(diag(inv.Hess))
+      
+      if (setup_level=="daily"){
+        SE_ls_d <- (exp(this.fit$par[3]))*res[3]
+      } else {
+        SE_ls_d <- (1/(1-(1/(1+exp(-(this.fit$par[3]))))^(1/7))^2)*((1/7)*(1/(1+exp(-(this.fit$par[3])))^(-(6/7))))*((exp(-(this.fit$par[3])))/(1+exp(-(this.fit$par[3])))^2)*(res[3])
+      }
+      
+      plot_df <- data.frame(lifespan=ls_phi,
+                            ci_low=ls_phi-(SE_ls_d*1.96),
+                            ci_up=ls_phi+(SE_ls_d*1.96))
+      
+      
+      
+      output$lifespan <- plot_df
+      
+      
+      
       output
     } else {NA}
   }	

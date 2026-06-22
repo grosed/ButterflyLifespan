@@ -42,7 +42,7 @@ as a [standalone R script](https://github.com/grosed/ButterflyLifespan/blob/main
 
 ### Example 2 - GAI singleyear
 
-TODO - Description to go here !!
+This example demonstrates the process of fitting a GAI single year stopover model using the package. The output is then processed to obtain the lifespan estimate with the associated uncertainty interval. 2016 Dark Green Fritillary data were used in the weekly format.
 
 The example is located in the examples directory of this repository and is available in the
 form of a [jupyter notebook](https://github.com/grosed/ButterflyLifespan/blob/main/examples/GAI-singleyear-stopover.ipynb) or

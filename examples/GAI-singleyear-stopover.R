@@ -19,3 +19,8 @@ output <- analysis(dgf_week,2016,"weekly")
 
 lifespan <- output[[1]][["lifespan"]]
 
+
+
+
+
+

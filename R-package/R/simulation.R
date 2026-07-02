@@ -17,7 +17,7 @@
 #' @param nS number of sites, if matching raw data then use the length of the output
 #' @param year, year to simulate 
 #'
-#' @return List of the output for each iteration of the simulation. 
+#' @return Vector containing the lifespan estimate for each simulation iteration. 
 #'
 #' @examples
 #'
@@ -124,7 +124,7 @@ beta2 <- 1
 
 output <- vector(mode = "list", length = n.iter)
 set.seed(0)
-for (i in 1:n.iter){
+for (iter in 1:n.iter){
   # Create values for the temperature
   nT <- nTmain
   ## If I want to add a temperature trend for the temperature data (I developed a piecewise linear regression and then added an error term)
@@ -764,6 +764,33 @@ if(length(year)==1){
                              2*(sum((output$modelfit$y*log(output$modelfit$y/output$Fitted)-((output$r.out+output$modelfit$y)*log((output$r.out+output$modelfit$y)/(output$r.out+output$Fitted))))[output$modelfit$y>0 & !is.na(output$modelfit$y)])-sum((output$r.out*log(output$r.out/(output$r.out+output$Fitted)))[!is.na(output$modelfit$y) & output$modelfit$y==0]))},
                            ZIP={NA})
       output$D <- output$dev/(length(output$modelfit$y[!is.na(output$modelfit$y)])-output$npar)
+      
+      trans_phi <- phi.out
+      if (setup_level=="weekly"){
+        trans_phi_day <- trans_phi^(1/7)
+        ls_phi <- (1/(1-trans_phi_day))
+      } else {
+        ls_phi <- (1/(1-trans_phi))
+      }
+      
+      Hess = this.fit$hessian
+      inv.Hess = solve(Hess)
+      res = sqrt(diag(inv.Hess))
+      
+      if (setup_level=="daily"){
+        SE_ls_d <- (exp(this.fit$par[3]))*res[3]
+      } else {
+        SE_ls_d <- (1/(1-(1/(1+exp(-(this.fit$par[3]))))^(1/7))^2)*((1/7)*(1/(1+exp(-(this.fit$par[3])))^(-(6/7))))*((exp(-(this.fit$par[3])))/(1+exp(-(this.fit$par[3])))^2)*(res[3])
+      }
+      
+      plot_df <- data.frame(lifespan=ls_phi,
+                            ci_low=ls_phi-(SE_ls_d*1.96),
+                            ci_up=ls_phi+(SE_ls_d*1.96))
+      
+      
+      
+      output$lifespan <- plot_df
+      
       output
     } else {NA}
   }	
@@ -1809,6 +1836,97 @@ if(length(year)==1){
       } 
       output$D <- sum(output$dev)/(sum(len_y)-output$npar)
       
+      trans_phi <- phi.out
+      if (setup_level=="weekly"){
+        trans_phi_day <- trans_phi^(1/7)
+        ls_phi <- (1/(1-trans_phi_day))
+      } else {
+        ls_phi <- (1/(1-trans_phi))
+      }
+      
+      Hess =this.fit$hessian
+      inv.Hess = solve(Hess)
+      res = sqrt(diag(inv.Hess))
+      
+      if (phi_type=="slope"){
+        
+        se_phi_int <- exp(phi.slope.out*phi.cov)*exp(phi.int.out)
+        se_phi_slope <- phi.cov*exp(phi.int.out)*exp(phi.slope.out*phi.cov)
+        
+        se_lifespan = vector(mode="numeric",length=length(mu1.out))
+        for (i in 1:length(mu1.out)){
+          se_phi_mat <- as.matrix(c(se_phi_int[i],se_phi_slope[i]))
+          
+          se_phi_row_mat <- t(se_phi_mat)
+          
+          var_cor_phi <- inv.Hess[(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + 2),(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + 2)]
+          
+          
+          se_lifespan[i] <- se_phi_row_mat %*% var_cor_phi %*% se_phi_mat
+        }
+        
+        
+        CI_lifespan = 1.96*(sqrt(se_lifespan))
+        
+        
+        plot_df <- data.frame(lifespan=ls_phi,
+                              ci_low=ls_phi-CI_lifespan,
+                              ci_up=ls_phi+CI_lifespan,
+                              year=year)
+        
+        
+      } else if (phi_type=="variable"){
+        res=res[(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + length(mu1.out))]
+        
+        if (setup_level=="daily"){
+          SE_ls_d <- (exp(this.fit$par))*res
+        } else {
+          SE_ls_d <- (1/(1-(1/(1+exp(-(this.fit$par))))^(1/7))^2)*((1/7)*(1/(1+exp(-(this.fit$par)))^(-(6/7))))*((exp(-(this.fit$par)))/(1+exp(-(this.fit$par)))^2)*(res)
+        }
+        
+        
+        plot_df <- data.frame(lifespan=ls_phi,
+                              ci_low=ls_phi-(SE_ls_d*1.96),
+                              ci_up=ls_phi+(SE_ls_d*1.96),
+                              year=year)
+        
+        
+        
+      } else if (ohi_type=="doubleslope"){
+        phi.cov = scale(1:length(mu1.out))
+        
+        se_phi_int <- exp(phi.slope.out*phi.cov)*exp(phi.int.out)*exp(phi.slope.out2*phi.cov^2)
+        se_phi_slope <- phi.cov*exp(phi.slope.out*phi.cov)*exp(phi.int.out)*exp(phi.slope.out2*phi.cov^2)
+        se_phi_slope2 <- (2*phi.cov)*phi.cov*exp(phi.slope.out*phi.cov)*exp(phi.int.out)*exp(phi.slope.out2*phi.cov^2)
+        
+        
+        
+        se_lifespan = vector(mode="numeric",length=length(mu1.out))
+        for (i in 1:length(mu1.out)){
+          se_phi_mat <- as.matrix(c(se_phi_int[i],se_phi_slope[i],se_phi_slope2[i]))
+          
+          se_phi_row_mat <- t(se_phi_mat)
+          
+          var_cor_phi <- inv.Hess[(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + 3),(length(mu1.out) + length(sigma.out) + 1):(length(mu1.out) + length(sigma.out) + 3)]
+          
+          
+          se_lifespan[i] <- se_phi_row_mat %*% var_cor_phi %*% se_phi_mat
+        }
+        
+        
+        CI_lifespan = 1.96*(sqrt(se_lifespan))
+        
+        
+        plot_df <- data.frame(lifespan=ls_phi,
+                              ci_low=ls_phi-CI_lifespan,
+                              ci_up=ls_phi+CI_lifespan,
+                              year=year)
+        
+      }
+      
+      
+      output$lifespan <- plot_df
+      
       output
     } else {NA}
   }
@@ -1820,18 +1938,24 @@ if(length(year)==1){
 
 
 
-######## end duplicate the analysis file inplace !!!
+######## end duplicate the analysis file in place !!!
 
 
 
 
-    output <- fit_it_model()
+    output[[iter]] <- fit_it_model()
 
-    return(output)
 
 }
 
+ls_sim_out <- vector()
+for (iter in 1:n.iter){
+  ls_sim_out[iter] <- sim_out[[iter]][[1]][["lifespan"]][["lifespan"]]
 }
+
+return(ls_sim_out)
+}
+
 
 
 

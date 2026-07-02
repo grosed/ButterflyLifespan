@@ -15,9 +15,12 @@ dgf_week <- dark_green_fritillary_weekly
 
 ## for demonstration purposes, take a random subset of the data
 
-set.seed(1)
-dgf_week <- dgf_week %>% filter(SITENO%in%sample(unique(dgf_week$SITENO),30)) %>% filter(YEAR > 2008)
+set.seed(12)
+dgf_week <- dgf_week %>%  filter(YEAR > 2008) %>% filter(SITENO%in%sample(unique(dgf_week$SITENO),30)) 
 
+
+
+ 
 ## analyse the data 
 
 output <- analysis_multiyear(dgf_week,"weekly","slope")
